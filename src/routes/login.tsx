@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LandingPage } from "@/components/landing/landing-page";
+import { LoginPage } from "@/components/auth/login-page";
 
-const title = "Vibecode Inc. — Build software with AI";
+const title = "Sign in — Vibecode Inc.";
 const description =
-  "Describe your idea in plain language and watch it become a real, deployable app with instant preview and one-click deploy.";
+  "Create your Vibecode account or sign back in to return to your AI software workspace.";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title },
@@ -16,5 +16,5 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: LandingPage,
+  component: LoginPage,
 });
