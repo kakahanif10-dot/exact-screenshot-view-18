@@ -212,6 +212,7 @@ const BRAND_ICON: Record<Template, typeof Home> = {
   ecommerce: ShoppingBag,
   health: HeartPulse,
   saas: Zap,
+  game: Sparkles,
   generic: Sparkles,
 }
 
@@ -1615,6 +1616,11 @@ function ProfilePage({
       { label: 'In cart', value: String(cartCount) },
       { label: 'Points', value: '860' },
     ],
+    game: [
+      { label: 'Score', value: '0' },
+      { label: 'Best', value: '0' },
+      { label: 'Level', value: '1' },
+    ],
     generic: [
       { label: 'Orders', value: '27' },
       { label: 'In cart', value: String(cartCount) },
@@ -1629,6 +1635,7 @@ function ProfilePage({
     saas: ['Workspace settings', 'Team & roles', 'Billing & plan', 'Notifications'],
     food: ['Order history', 'Addresses', 'Payment methods', 'Notifications'],
     ecommerce: ['Order history', 'Addresses', 'Payment methods', 'Notifications'],
+    game: ['High scores', 'Controls', 'Sound', 'Notifications'],
     generic: ['Order history', 'Addresses', 'Payment methods', 'Notifications'],
   }
   const stats = STAT_SETS[spec.template] ?? STAT_SETS.generic
