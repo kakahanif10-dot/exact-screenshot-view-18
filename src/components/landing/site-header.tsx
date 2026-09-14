@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/nav-link'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { VibecodeLogo } from '@/components/vibecode-logo'

@@ -1,8 +1,8 @@
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/nav-link'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/lib/use-router-compat'
 import { motion } from 'framer-motion'
 import { ArrowRight, Paperclip, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'

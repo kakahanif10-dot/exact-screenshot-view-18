@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import Link from '@/components/nav-link'
 import { motion } from 'framer-motion'
 import { Check, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
