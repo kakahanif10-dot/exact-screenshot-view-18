@@ -77,21 +77,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { name: "color-scheme", content: "dark" },
+      { name: "theme-color", content: "#0A0A0A" },
+      { title: "Vibecode Inc. — Build software with AI" },
+      {
+        name: "description",
+        content:
+          "Vibecode is the AI software generator. Describe your idea in plain language and watch it become a real, deployable app.",
+      },
+      { property: "og:title", content: "Vibecode Inc. — Build software with AI" },
+      {
+        property: "og:description",
+        content:
+          "Describe your idea in plain language and watch it become a real, deployable app.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
-    ],
+        ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
