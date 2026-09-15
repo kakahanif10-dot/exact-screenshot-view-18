@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiEnvcheckRouteImport } from './routes/api/envcheck'
 import { Route as ApiGenerateRouteImport } from './routes/api/generate'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiEnvcheckRoute = ApiEnvcheckRouteImport.update({
+  id: '/api/envcheck',
+  path: '/api/envcheck',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiGenerateRoute = ApiGenerateRouteImport.update({
   id: '/api/generate',
   path: '/api/generate',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/workspace': typeof WorkspaceRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/envcheck': typeof ApiEnvcheckRoute
   '/api/generate': typeof ApiGenerateRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/workspace': typeof WorkspaceRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/envcheck': typeof ApiEnvcheckRoute
   '/api/generate': typeof ApiGenerateRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,34 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/workspace': typeof WorkspaceRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/envcheck': typeof ApiEnvcheckRoute
   '/api/generate': typeof ApiGenerateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/workspace' | '/api/chat' | '/api/generate'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/workspace'
+    | '/api/chat'
+    | '/api/envcheck'
+    | '/api/generate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/workspace' | '/api/chat' | '/api/generate'
-  id: '__root__' | '/' | '/login' | '/workspace' | '/api/chat' | '/api/generate'
+  to:
+    | '/'
+    | '/login'
+    | '/workspace'
+    | '/api/chat'
+    | '/api/envcheck'
+    | '/api/generate'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/workspace'
+    | '/api/chat'
+    | '/api/envcheck'
+    | '/api/generate'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +104,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   WorkspaceRoute: typeof WorkspaceRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiEnvcheckRoute: typeof ApiEnvcheckRoute
   ApiGenerateRoute: typeof ApiGenerateRoute
 }
 
@@ -109,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/envcheck': {
+      id: '/api/envcheck'
+      path: '/api/envcheck'
+      fullPath: '/api/envcheck'
+      preLoaderRoute: typeof ApiEnvcheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/generate': {
       id: '/api/generate'
       path: '/api/generate'
@@ -124,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   WorkspaceRoute: WorkspaceRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiEnvcheckRoute: ApiEnvcheckRoute,
   ApiGenerateRoute: ApiGenerateRoute,
 }
 export const routeTree = rootRouteImport
