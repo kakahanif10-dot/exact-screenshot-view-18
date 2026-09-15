@@ -182,3 +182,9 @@
 .thin-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Globally hide anything marked with the id "lovable-badge" */
+#lovable-badge,
+[id="lovable-badge"] {
+  display: none !important;
+}
