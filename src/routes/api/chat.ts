@@ -8,7 +8,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { streamText, type GatewayMessage } from '@/lib/ai-gateway.server'
 
 // Ordered fallbacks tried when the primary model is overloaded or rate-limited.
-const MODEL_FALLBACKS = ['google/gemini-2.5-flash', 'google/gemini-2.5-flash-lite'] as const
+const MODEL_FALLBACKS = ['google/gemini-3.8-flash', 'google/gemini-3.1-flash-lite'] as const
 
 type ChatTurn = { role: 'user' | 'assistant'; text: string }
 type SpecContext = {

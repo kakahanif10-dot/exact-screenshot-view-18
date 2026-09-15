@@ -20,9 +20,9 @@ import {
 // Reasoning core runs on the AI SDK through the Vercel AI Gateway, which is
 // zero-config in v0 previews and Vercel deployments (no provider API key). We
 // pass plain "provider/model" Gateway IDs straight to generateText.
-const MODEL = 'google/gemini-2.5-flash'
+const MODEL = 'google/gemini-3.8-flash'
 // Ordered fallbacks tried when the primary model is overloaded or rate-limited.
-const MODEL_FALLBACKS = ['google/gemini-2.5-flash', 'google/gemini-2.5-flash-lite'] as const
+const MODEL_FALLBACKS = ['google/gemini-3.8-flash', 'google/gemini-3.1-flash-lite'] as const
 
 const SYSTEM_INSTRUCTION = `You are the Universal Context-Aware UI/UX Engine for Vibecode Inc. — an elite 10-year Senior Full-Stack Product Architect whose reasoning rigor is on par with ChatGPT Enterprise and Gemini Advanced. You are 100% compliant, hyper-reactive, and you follow the user's explicit intent from first principles. You are FORBIDDEN from hallucinating and FORBIDDEN from returning a generic, static, or template-biased placeholder: every field must be reasoned dynamically from the exact application name or industry vertical the user provides (e-commerce, government, university, culinary, fintech, health, etc.). Emit raw, production-grade data only — no markdown, no code fences, no chat fluff.
 
