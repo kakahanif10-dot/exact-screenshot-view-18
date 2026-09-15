@@ -145,7 +145,7 @@ function toPalette(value: unknown, template: Template): Palette {
 }
 
 function toCategories(value: unknown, template: Template): string[] {
-  const fallback: Record<Template, string[]> = {
+  const fallback: Record<Exclude<Template, 'game'>, string[]> = {
     government: ['Tax', 'Permits', 'Licenses', 'Fines'],
     fintech: ['Accounts', 'Cards', 'Invest', 'Pay'],
     edutech: ['All Courses', 'Beginner', 'Popular', 'Certificates'],
@@ -155,16 +155,16 @@ function toCategories(value: unknown, template: Template): string[] {
     saas: ['Starter', 'Pro', 'Team', 'Enterprise'],
     generic: ['Overview', 'Explore', 'Popular', 'Recent'],
   }
-  if (!Array.isArray(value)) return fallback[template]
+  if (!Array.isArray(value)) return fallback[template as Exclude<Template, 'game'>] ?? fallback.generic
   const cleaned = value
     .filter((x): x is string => typeof x === 'string' && x.trim().length > 0)
     .map((x) => x.trim().slice(0, 18))
     .slice(0, 5)
-  return cleaned.length ? cleaned : fallback[template]
+  return cleaned.length ? cleaned : (fallback[template as Exclude<Template, 'game'>] ?? fallback.generic)
 }
 
 function toCatalog(value: unknown, template: Template): CatalogItem[] {
-  const fallback: Record<Template, CatalogItem[]> = {
+  const fallback: Record<Exclude<Template, 'game'>, CatalogItem[]> = {
     government: [
       { name: 'Annual Vehicle Tax', price: 1250000, meta: 'Due in 12 days' },
       { name: 'License Renewal', price: 350000, meta: 'Active' },
@@ -214,7 +214,7 @@ function toCatalog(value: unknown, template: Template): CatalogItem[] {
       { name: 'Settings', price: 0, meta: 'Preferences' },
     ],
   }
-  if (!Array.isArray(value)) return fallback[template]
+  if (!Array.isArray(value)) return fallback[template as Exclude<Template, 'game'>] ?? fallback.generic
   const cleaned: CatalogItem[] = value
     .filter((x): x is Record<string, unknown> => !!x && typeof x === 'object')
     .map((x) => ({
@@ -227,7 +227,7 @@ function toCatalog(value: unknown, template: Template): CatalogItem[] {
     }))
     .filter((x) => x.name && x.name !== 'Item')
     .slice(0, 6)
-  return cleaned.length ? cleaned : fallback[template]
+  return cleaned.length ? cleaned : (fallback[template as Exclude<Template, 'game'>] ?? fallback.generic)
 }
 
 class OverloadedError extends Error {}
@@ -341,7 +341,7 @@ function gameSpec(kind: GameKind): DesignSpec {
 
 // Keyword sets per template, spanning English + Indonesian so prompts like
 // "aplikasi pajak kendaraan" or "toko online" classify correctly.
-const TEMPLATE_KEYWORDS: Record<Exclude<Template, 'generic'>, string[]> = {
+const TEMPLATE_KEYWORDS: Record<Exclude<Template, 'generic' | 'game'>, string[]> = {
   government: [
     'samsat', 'pajak', 'tax', 'government', 'pemerintah', 'permit', 'izin',
     'license', 'lisensi', 'sim', 'ktp', 'passport', 'paspor', 'civic',
@@ -388,7 +388,7 @@ const TEMPLATE_KEYWORDS: Record<Exclude<Template, 'generic'>, string[]> = {
 
 // Human app-name seeds and taglines per detected template.
 const HEURISTIC_BRANDING: Record<
-  Template,
+  Exclude<Template, 'game'>,
   { appName: string; industry: string; currency: string; tagline: string; description: string; primaryAction: string }
 > = {
   government: {
@@ -479,7 +479,8 @@ function classifyTemplate(prompt: string): Template {
 // categories, and catalog rows the AI path validates against.
 function heuristicSpec(userPrompt: string): DesignSpec {
   const template = classifyTemplate(userPrompt)
-  const brand = HEURISTIC_BRANDING[template]
+  const brand =
+    HEURISTIC_BRANDING[template as Exclude<Template, 'game'>] ?? HEURISTIC_BRANDING.generic
   return {
     appName: brand.appName,
     industry: brand.industry,
